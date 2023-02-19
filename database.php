@@ -5,7 +5,7 @@ if(!$conn)
 {
     echo "error: " . mysqli_connect_error();
 } else{
-    echo "Welcomein database ice_cream.";
+   // echo "Welcomein database ice_cream.";
 }
 
 ?>

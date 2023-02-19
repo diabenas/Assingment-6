@@ -1,12 +1,10 @@
 <?php
   //session_start();
   //if(isset($_SESSION['name_user']) && isset($_SESSION['password_user'])){
-
 	// Start the session
 	session_start();
 	if(empty($_SESSION['uname']))
 	{
-	   // echo "hi again";
 		header("Location: login.php");
 	}
 
@@ -27,7 +25,7 @@
 		    <p id="img"> <img src="./img/Gelato.logo.png" alt="gelato" > </p>
 		    <h1 id="top">Gelato</h1>
 			<h2 id="top1"> <a href="Login.php"><img src="./img/login.logo.png" alt="logo"></a></h2>
-			<h1 id="top2"> <a href="shoppigcart.php"><img src="./img/shopping cart.png"alt="shoppingcart"></a></h3>
+			<h1 id="top2"> <a href="cartphp.php"><img src="./img/shopping cart.png"alt="shoppingcart"></a></h3>
 			<h2 id="top3"> <a href="logout.php" >logout</a></h2>
 	        <h3 id="namei">
             <?php

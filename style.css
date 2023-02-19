@@ -160,7 +160,7 @@ ul  li  a:hover{
   padding: 16px;
 }
 /* set a style for all buttons*/
-button {
+.signupbtn {
   background-color:rgb(165, 65, 65);
   color: rgb(12, 11, 11);
   padding:15px 35px;
@@ -297,7 +297,7 @@ button {
   padding: 4px 8px;
   background-color: #c66;
   color: #fff;
-  font-family: $font-bold;
+  font-family:font-bold;
   font-size: 12px;
   border-radius: 3px;
 }
@@ -470,6 +470,45 @@ button {
   padding-bottom: 40px;
   width: 500px;
 }
+.dropdown {
+  display: inline-block;
+  position: relative;
+  border-color: #e989a1;
+  padding-left: 2%; 
+  margin-right: 100%;; 
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a {
+  display: block;
+  color: #000000;
+  padding: 15px;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  color: #FFFFFF;
+  background-color: #00A4BD;
+}
+#butt{
+  color: wheat;
+  padding: 15%;
+  background-color: #a85858;
+  border: 2px solid rgb(212, 156, 156);
+  font-size: large;
+}
+.picart1{
+  height: 160px;
+  width: 100px;
+  border-radius: 20px;
+ }
 footer {
   display: flex;
   background-color: rgb(197, 120, 120);

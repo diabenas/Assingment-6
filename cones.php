@@ -1,5 +1,6 @@
 <?php
  session_start();
+ include 'database.php';
  if(empty($_SESSION['uname']))
  {
     // echo "hi again";
@@ -17,7 +18,7 @@
 			<p id="img"> <img src="./img/Gelato.logo.png" alt="logo"> </p>
 		    <h1 id="top">Gelato</h1>
 			<h2 id="top1"> <a href="Login.php"><img src="./img/login.logo.png" alt="logo"></a></h2>
-      <h3 id="top2"> <a href="shoppigcart.php"><img src="./img/shopping cart.png"alt="shoppingcart"></a></h3>
+      <h3 id="top2"> <a href="cartphp.php"><img src="./img/shopping cart.png"alt="shoppingcart"></a></h3>
       <h2 id="top3"> <a href="logout.php" >logout</a></h2>
 	        <h3 id="namei">
             <?php
@@ -39,76 +40,48 @@
          </body>
     </form>
 	<main id="main">
-	  <form>
-      <br> <br> <br>
+  <form action="cartphp.php" method="post">
 	    	<div class="container">
-            <div class="card">
-              <div class="card__header">
-                <img src="./img/chocolate-cones.jpg" alt="card__image">
-              </div>
-              <div class="card__body">
-                <h4>chocolate</h4>
-              </div>
-              <div class="card__footer">
-                    <h3>Price: 3 LY.D <button> add cart </button></h3>
-              </div>
+        <div class="dropdown">
+            <button id="butt">Category</button>
+            <div class="dropdown-content">
+            <a href="Tubs.php">Tubs</a>
+            <a href="cones.php">Cones</a>
+            <a href="Bars.php">Bars</a>
             </div>
-            <div class="card">
-              <div class="card__header">
-                <img src="./img/marshmallow ice cream.jpg" alt="card__image">
-              </div>
-              <div class="card__body">
-                <h4>marshmallow </h4>
-              </div>
-              <div class="card__footer">
-                    <h3>Price: 3 LY.D<button> add cart </button></h3>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card__header">
-                <img src="./img/oreo ice cream.jpg" alt="card__image">
-              </div>
-              <div class="card__body">
-                <h4>oreo</h4>
-              </div>
-              <div class="card__footer">
-                    <h3>Price: 3 LY.D <button> add cart </button></h3>
-              </div>
-            </div>
-            <div class="card">
-                <div class="card__header">
-                  <img src="./img/pistachio_cones.jpg" alt="card__image" >
-                </div>
-                <div class="card__body">
-                  <h4>pistachio</h4>
-                </div>
-                <div class="card__footer">
-                      <h3>Price: 3 LY.D <button> add cart </button></h3>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card__header">
-                  <img src="./img/strawberries-cones.jpg" alt="card__image" >
-                </div>
-                <div class="card__body">
-                  <h4>strawberries</h4>
-                </div>
-                <div class="card__footer">
-                      <h3>Price: 3 LY.D <button> add cart </button></h3>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card__header">
-                  <img src="./img/vainilla-comes.jpg" alt="card__image">
-                </div>
-                <div class="card__body">
-                  <h4>vainilla</h4>
-                </div>
-                <div class="card__footer">
-                      <h3>Price: 3 LY.D <button> add cart </button></h3>
-                </div>
-            </div>	
         </div>
+        <table style="width:100%; margin:20px; margin-right:10%;" class="tab1" >
+            <tr>
+              <th>   </th>
+              <th> Category </th>
+              <th> Description </th>
+              <th> Price </th>
+              <th> Quantity </th> 
+            </tr>
+            <tr>
+            <tr>
+            <?php 
+             $sql= "SELECT * FROM items WHERE categoryid='2'";
+             $result = $conn->query($sql);
+             $p=0;
+             while($row = $result->fetch_assoc()){
+              ?>
+              <th> </th>
+              <th>
+              <?php echo $row['name-item'];   ?> </th>
+             <th> <?php echo $row['description-item']; ?></th>
+             <th>  <?php echo $row['price-item']; ?> </th> 
+             <th><input type="number" name="p" value="1" min="1" max="10"></th>
+             <th> <button >add cart</button> </th>
+            </tr> 
+            
+            
+            <?php
+            $p=$p+1;
+            }
+                ?>
+                 
+          </table>
 	</form>
    </main>
    <footer>

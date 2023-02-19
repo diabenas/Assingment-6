@@ -6,28 +6,8 @@
 		header("Location: login.php");
 	}
 ?>
-<?php
-  // create short variable names
-  $pr1=0;
-  $pr2=0;
-  $pr3=0;
-  $pr4=0;
-  
-  if(!empty($_POST['pr1']))
-    $pro1 = $_POST['pr1'];
- 
-    if(!empty($_POST['pr2']))
-    $pro2 = $_POST['pr2'];
 
-    if(!empty($_POST['pr3']))
-    $pro3 = $_POST['pr3'];
-    if(!empty($_POST['pr4']))
-    $pro4 = $_POST['pr4'];
- 
-
-?>
 <!DOCTYPE html>
-    <!DOCTYPE html>
 <html lang="en">
     <head>
         <title> Gelato </title>
@@ -65,31 +45,63 @@
         <main id="main">
            <form action="order.php" method="post">
             <br> <br> <br>
-           <table style="border: 0px;">
-             <tr style="background: #cccccc;">
-               <td style="width: 700px; text-align: center;">Item</td>
-               <td style="width: 15px; text-align: center;">Quantity</td>
-              </tr>
-             <tr>
-               <td>Vanilla</td>
-               <td><input type="text" name="pr1" size="3" maxlength="3" /></td>
-             </tr>
-             <tr>
-                <td> Chocolate</td>
-                <td><input type="text" name="pr2" size="3" maxlength="3" /></td>
-             </tr>
-             <tr>
-               <td>Strawberry</td>
-               <td><input type="text" name="pr3" size="3" maxlength="3" /></td>
-             </tr>
-             <tr>
-               <td>Cookies Cream</td>
-               <td><input type="text" name="pr4" size="3" maxlength="3" /></td>
-             </tr>
-           <tr>
-             <td colspan="2" style="text-align: center;"><input type="submit" value="Submit Order" /></td>
-           </tr>
-        </table>
+            <div class="wrapper">
+      <h1>Shopping Cart</h1>
+      <div  class="project">
+        <div class="shop">
+          <div class="box">
+            <img src="./img/icloo_q.jpg" alt="card__image">
+            <div class="conten">
+              <h3>Igloo Balou Chocolate Ice Cream</h3>
+              <h4>price: 2.5ly.d</h4>
+              <div class="product-quantity">
+                <p>Quantity<input type="number" value="1" min="1" max="10"></p>
+              </div>
+              <div class="product-removal">
+                <button class="remove-product">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <img src="./img/icloo-cookies.jpg" alt="card__image">
+            <div class="conten">
+              <h3>Igloo Cookies Cream Ice Cream</h3>
+              <h4>price: 4ly.d</h4>
+              <div class="product-quantity">
+                <p>Quantity<input type="number" value="1" min="1" max="10"></p>
+              </div>
+              <div class="product-removal">
+                <button class="remove-product">
+                  Remove
+                </button>
+              </div>
+            </div>
+        </div>
+        <div class="box">
+          <img src="./img/igloo-choo.png" alt="card__image">
+          <div class="conten">
+            <h3>Igloo Chocolate Ice Cream</h3>
+            <h4>price: 13ly.d</h4>
+            <div class="product-quantity">
+              <p>Quantity<input type="number" value="1" min="1" max="10"></p>
+            </div>
+            <div class="product-removal">
+              <button class="remove-product">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-bar">
+        <p><span>Shipping</span> <span>15ly.d</span></p>
+        <hr>
+        <p><span>Total</span> <span>40ly.d</span></p>
+        <a href="confirmation-form.html"><i>checkout</i></a>
+      </div>
+  </div>
      </form>
      <div class="prices">
 	   	 <h3 ><a href="Prices.php">View products</a></h3>
