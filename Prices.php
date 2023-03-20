@@ -1,5 +1,6 @@
 <?php
  session_start();
+ include_once 'database.php';
  if(empty($_SESSION['uname']))
  {
     // echo "hi again";
@@ -43,12 +44,18 @@
 	  	<div class="container">
         <div class="dropdown">
             <button id="butt">Category</button>
-            <div class="dropdown-content">
+          <div class="dropdown-content">
             <a href="Tubs.php">Tubs</a>
             <a href="cones.php">Cones</a>
             <a href="Bars.php">Bars</a>
-            </div>
+         </div>
         </div>
+          <?php
+            if($_SESSION['job'] == 'admin'){ ?>
+           <button><a href="edit item.php">Edit Items</a></button>
+           <?php
+            }
+           ?>
           <table style="width:100%; margin:20px; margin-right:10%;">
             <tr>
               <th>   </th>

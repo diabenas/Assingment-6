@@ -28,28 +28,27 @@ include 'database.php';
       $row = mysqli_fetch_assoc($result);
       if($row['email'] === "$uname" && $row['password'] === "$pass"){
         
+        $_SESSION['iduser']= $row['id'];
         $_SESSION['uname']= $uname;
         $_SESSION['pass']=$pass; 
         $_SESSION['fname'] = $row['fname'];
         $_SESSION['address']= $row['address'];
         $_SESSION['phone']=$row['phone'];
         $_SESSION['lname'] = $row['lname'];
+        $_SESSION['job']= $row['job'];
         header("Location: pagehome.php");
        // exit();
       }else{
         //echo($sql);
-        header("Location: login.php");
+        //echo "Data Entry Error";
+        header("Location: woring.php");
        
         //exit();
     }
     
     }
-    else{
-      header("Location: login.php");
-    }
+    
   }
-}else{
-  header("Location: login.php");
 }
 
 ?>

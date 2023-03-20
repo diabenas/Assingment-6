@@ -288,7 +288,7 @@ ul  li  a:hover{
   margin-bottom: 50px;
 }
 .product-quantity {
-  input {
+  input{
   width: 40px;  
   }
 }
@@ -509,6 +509,7 @@ ul  li  a:hover{
   width: 100px;
   border-radius: 20px;
  }
+
 footer {
   display: flex;
   background-color: rgb(197, 120, 120);

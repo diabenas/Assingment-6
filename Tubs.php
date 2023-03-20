@@ -57,25 +57,25 @@
               <th> Description </th>
               <th> Price </th>
               <th> Quantity </th> 
+              <th> Id Item </th>
             </tr>
             <tr>
             <?php 
              $sql= "SELECT * FROM items WHERE categoryid='1'";
              $result = $conn->query($sql);
-             $p=0;
              while($row = $result->fetch_assoc()){
               ?>
               <th> </th>
               <th>
-              <?php echo $row['name-item'];   ?> </th>
-             <th> <?php echo $row['description-item']; ?></th>
-             <th>  <?php echo $row['price-item']; ?> </th> 
-             <th><input type="number" name="p" value="1" min="1" max="10"></th>
-             <th> <button >add cart</button> </th>
+              <?php echo $row['nameitem'];   ?> </th>
+             <th> <?php echo $row['descriptionitem']; ?></th>
+             <th>  <?php echo $row['priceitem']; ?> </th> 
+             <th><?php if($row['itemqua']>0){ ?><input type="number" name="quantity" value="1" min="1" max="100"><?php } ?></th>
+             <th> <input type="number" name="iditem" value="1" min="1" max="100"></th>
+             <th> <input type="submit" name="Add" value="Add cart"> </th> </th>
             </tr> 
             
             <?php
-            $p=$p+1;
             }
                 ?>
                 

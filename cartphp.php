@@ -6,13 +6,8 @@
     header("Location: login.php");
   }
   include 'database.php';
-  $p1=0;
-  $p2=0;
-  $p3=0;
-  $p3=0;
-  $p4=0;
-  $p5=0;
-  $p6=0;
+  $mysqli = new mysqli('localhost', 'Enas', '1234diab', 'ice-creamdataase');
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,157 +38,65 @@
               <li><a href="profile.php" ><?php echo $_SESSION['uname'];?></a><li>
 		       </ul>
             </nav>
-            <?php
-    try {
-        if (!isset($_POST['p1']))
-            throw new Exception("You need to select quantity");
-        $item = $_POST['p1'];
-        if (empty($_POST['p1']))
-            throw new Exception("You need to enter quantity");
-      //  echo ("You selected ");
-
-    }
-    //catch exception
-    catch (Exception $e) {
-       // echo 'Message: ' . $e->getMessage();
-    }
-    ?>
+            
          </body>
     </form>
  <main id="main">
     <br> <br> <br>
     <h1> My Cart </h1>
     <?php
-      $sql="SELECT * FROM shoppingcart JOIN items ON items.itemid = shoppingcart.itemid";
-      $result = $conn->query($sql);
-      if($result->num_rows>0)
-      {
-        for($j=1;$row=$result->fetch_assoc();$j++){
-            echo "Item: " .$j." <br>";
-            echo "flavor:" .$row["name-item"]. "<br>";
-            echo  "quantity:" .$row["item-qua"]. "<br>";
-        }
-      } else if($p1 == 1 && $p2==0 && $p3==0 && $p4==0 && $p5==0 && $p6==0)
-      {
-        echo "cart is empty";
-      }
-    ?>
-   <?php
-   if($p1!=0){
-       try{
-        $mysqli->begin_transaction();
-        $sq="SELECT * FROM items WHERE itemid='1' ";
-        $result = $conn->query($sq);
-        $row=$result->fetch_assoc();
-        if($row["item-qua"] > $p1){
-            $sql= "INSERT INTO shoppingcart (itemid,item-qua) VALUES('1','$p1)'";
-            if (mysqli_query($conn, $sql)) {
-                echo $p1. "Coffe ice cream";
+    $conn =new mysqli('localhost', 'Enas', '1234diab', 'ice-creamdataase');
+    try{
+
+        if (empty($_POST['quantity']))
+            throw new Exception("You need to enter quantity");
+ 
+        if (!isset($_POST['quantity']))
+            throw new Exception("You need to select quantity");
+        $quan = $_POST['quantity'];
+        
+        $iditem = $_POST["iditem"];
+        echo ("You selected $items items(s) itemid= $iditem");
+        $sql = "SELECT * FROM items ";
+        $result = $conn->query($sql);
+        $data = $result->fetch_array(MYSQLI_ASSOC);
+        $nameit = $data['nameitem'];
+        $price=$data['priceitem'];
+        $quant = $data['itemqua'];
+        $iditem = $data['itemid'];
+        //echo "gggg";
+        if($quan > 0)
+        {
+
+            $query= "INSERT INTO shoppingcart ( itemid, nameitem, itemqua , priceitem  ) VALUES 
+            ( $iditem,'$nameit', $quant, $price)";
+            echo "gggg";
+            $edit =  $conn->query($query);
+            $mysqli->commit();
+     
+            if($edit)
+            {
+                $conn->close();// Close connection
+                header("location:update-item.php"); // redirects to all records page
+                exit;
             }
-        }
-       }
-       catch(mysqli_sql_exception $exception)
+            $conn->commit();
+            else
+            {
+                echo "<p>Unable to execute the query.</p> ";
+                //echo $query;
+                die ($conn -> error);
+            }
+    }
+   }
+    catch(mysqli_sql_exception $exception)
                  {
-                    $mysqli->rollback();
-                    header("Location: prices.php");
+                    $conn->rollback();
+                    header("Location: price.php");
+                    exit;
                  }
-}
-if($p2!=0){
-    try{
-     $mysqli->begin_transaction();
-     $sq="SELECT * FROM items WHERE itemid='1' ";
-     $result = $conn->query($sq);
-     $row=$result->fetch_assoc();
-     if($row["item-qua"] > $p1){
-         $sql= "INSERT INTO shoppingcart (itemid,item-qua) VALUES('1','$p2)'";
-         if (mysqli_query($conn, $sql)) {
-             echo $p1. "Coffe ice cream";
-         }
-     }
-    }
-    catch(mysqli_sql_exception $exception)
-              {
-                 $mysqli->rollback();
-                 header("Location: prices.php");
-              }
-}
-if($p3!=0){
-    try{
-     $mysqli->begin_transaction();
-     $sq="SELECT * FROM items WHERE itemid='1' ";
-     $result = $conn->query($sq);
-     $row=$result->fetch_assoc();
-     if($row["item-qua"] > $p1){
-         $sql= "INSERT INTO shoppingcart (itemid,item-qua) VALUES('1','$p3)'";
-         if (mysqli_query($conn, $sql)) {
-             echo $p1. "Coffe ice cream";
-         }
-     }
-    }
-    catch(mysqli_sql_exception $exception)
-              {
-                 $mysqli->rollback();
-                 header("Location: prices.php");
-              }
-}
-if($p4!=0){
-    try{
-     $mysqli->begin_transaction();
-     $sq="SELECT * FROM items WHERE itemid='1' ";
-     $result = $conn->query($sq);
-     $row=$result->fetch_assoc();
-     if($row["item-qua"] > $p1){
-         $sql= "INSERT INTO shoppingcart (itemid,item-qua) VALUES('1','$p4)'";
-         if (mysqli_query($conn, $sql)) {
-             echo $p1. "Coffe ice cream";
-         }
-     }
-    }
-    catch(mysqli_sql_exception $exception)
-              {
-                 $mysqli->rollback();
-                 header("Location: prices.php");
-              }
-}
-if($p5!=0){
-    try{
-     $mysqli->begin_transaction();
-     $sq="SELECT * FROM items WHERE itemid='1' ";
-     $result = $conn->query($sq);
-     $row=$result->fetch_assoc();
-     if($row["item-qua"] > $p1){
-         $sql= "INSERT INTO shoppingcart (itemid,item-qua) VALUES('1','$p5)'";
-         if (mysqli_query($conn, $sql)) {
-             echo $p1. "Coffe ice cream";
-         }
-     }
-    }
-    catch(mysqli_sql_exception $exception)
-              {
-                 $mysqli->rollback();
-                 header("Location: prices.php");
-              }
-}
-if($p6!=0){
-    try{
-     $mysqli->begin_transaction();
-     $sq="SELECT * FROM items WHERE itemid='1' ";
-     $result = $conn->query($sq);
-     $row=$result->fetch_assoc();
-     if($row["item-qua"] > $p1){
-         $sql= "INSERT INTO shoppingcart (itemid,item-qua) VALUES('1','$p6)'";
-         if (mysqli_query($conn, $sql)) {
-             echo $p1. "Coffe ice cream";
-         }
-     }
-    }
-    catch(mysqli_sql_exception $exception)
-              {
-                 $mysqli->rollback();
-                 header("Location: prices.php");
-              }
-}
-   ?>
+    ?>
+   
 </main>
 <div class="prices">
 	   	 <h3 ><a href="Prices.php">View products</a></h3>

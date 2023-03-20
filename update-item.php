@@ -1,19 +1,17 @@
 <?php
  session_start();
- include 'database.php';
+ include_once 'database.php';
  if(empty($_SESSION['uname']))
  {
-    // echo "hi again";
-   header("Location: login.php");
+     header("Location: login.php");
  }
-
-?>
+ ?>
+ 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title> Gelato </title>
         <link rel="stylesheet" type="text/css" href="style.css">
-	<form>
 		<header id="hr">
 			<p id="img"> <img src="./img/Gelato.logo.png" alt="logo"> </p>
 		    <h1 id="top">Gelato</h1>
@@ -38,55 +36,46 @@
 		       </ul>
             </nav>
          </body>
-    </form>
-	<main id="main">
-  <form action="cartphp.php" method="post">
-	    	<div class="container">
-        <div class="dropdown">
-            <button id="butt">Category</button>
-            <div class="dropdown-content">
-            <a href="Tubs.php">Tubs</a>
-            <a href="cones.php">Cones</a>
-            <a href="Bars.php">Bars</a>
-            </div>
-        </div>
-        <table style="width:100%; margin:20px; margin-right:10%;" class="tab1" >
+    <main id="main">
+        <form  method="post">
+          <br> <br>
+
+            <table style="width:100%; margin:20px; margin-right:10%;" class="tab1" >
             <tr>
               <th>   </th>
+              <th> Item id </th>
               <th> Category </th>
+              <th> name item</th>
               <th> Description </th>
               <th> Price </th>
-              <th> Quantity </th>
-              <th> Id Item </th> 
+              <th> Quantity </th> 
             </tr>
             <tr>
-            <tr>
             <?php 
-             $sql= "SELECT * FROM items WHERE categoryid='2'";
+             $sql= "SELECT itemid, categoryid, nameitem, priceitem,descriptionitem,itemqua FROM items  ";
              $result = $conn->query($sql);
-             while($row = $result->fetch_assoc()){
+             if (!$result) {
+              echo "<p>Unable to execute the query.</p> ";
+              echo $query;
+              die($conn->error);
+            }
+             while($row = $result->fetch_array(MYSQLI_ASSOC)){
               ?>
               <th> </th>
-              <th>
-              <?php echo $row['nameitem'];   ?> </th>
-             <th> <?php echo $row['descriptionitem']; ?></th>
-             <th>  <?php echo $row['priceitem']; ?> </th> 
-             <th><?php if($row['itemqua']>0){ ?><input type="text" name="quantity" value="1" min="1" max="100"><?php } ?></th>
-             <th> <input type="text" name="iditem" value="1" min="1" max="100"></th>
-             <th> <input type="submit" name="Add" value="Add cart"> </th> </th>
+              <th> <?php echo $row['itemid'];  ?> </th>
+             <th> <?php echo $row['categoryid'];  ?> </th>
+             <th> <?php echo $row['nameitem'];  ?></th>
+             <th>  <?php echo $row['descriptionitem'];  ?>  </th> 
+             <th>  <?php echo $row['priceitem'];  ?> </th>
+             <th> <?php echo $row['itemqua'];  ?> </th>
+             <td><a href="edit.php?iditem=<?php echo $row['itemid']; ?>">Edit</a></td>
+          <td><a href="delete-item.php?iditem=<?php echo $row['itemid']; ?>">Delete</a></td>
             </tr> 
-            
             
             <?php
             }
                 ?>
-                 
-          </table>
-	</form>
-   </main>
-   <footer>
-    <div id="footer">
-		  <h4>© 2022-2023 GELATO </h4>
-	    </div>
-   </footer>
+        </form>
+    </main>
+
 </html>
